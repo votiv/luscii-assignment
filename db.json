@@ -1,0 +1,42 @@
+{
+  "trainers": [
+    {
+      "id": 1,
+      "name": "Blue",
+      "email": "blue.trainer@pkmn.com",
+      "phoneNumber": "11 22 33 44 55",
+      "pokemonTeam": [
+        {
+          "id": 9,
+          "name": "Blastoise",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png"
+        },
+        {
+          "id": 65,
+          "name": "Alakazam",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png"
+        },
+        {
+          "id": 112,
+          "name": "Rhydon",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/112.png"
+        },
+        {
+          "id": 18,
+          "name": "Pidgeot",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png"
+        },
+        {
+          "id": 68,
+          "name": "Machamp",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/68.png"
+        },
+        {
+          "id": 59,
+          "name": "Arcanine",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png"
+        }
+      ]
+    }
+  ]
+}

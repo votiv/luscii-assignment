@@ -1,0 +1,33 @@
+{
+  "name": "luscii-frontend-test-prototype",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run spin-backend & npm run vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "vite": "vite",
+    "spin-backend": "json-server --watch db.json"
+  },
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-modal": "^3.16.3",
+    "react-router-dom": "^7.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.4",
+    "@types/react-dom": "^19.0.2",
+    "@types/react-modal": "^3.16.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "json-server": "^0.17.4",
+    "postcss": "^8.4.49",
+    "prettier": "3.4.2",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
+  }
+}
