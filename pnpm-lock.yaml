@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@hookform/resolvers':
+        specifier: ^4.1.0
+        version: 4.1.0(react-hook-form@7.54.2(react@19.0.0))
+      '@tanstack/react-query':
+        specifier: ^5.66.0
+        version: 5.66.0(react@19.0.0)
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -17,12 +23,18 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
+      react-hook-form:
+        specifier: ^7.54.2
+        version: 7.54.2(react@19.0.0)
       react-modal:
         specifier: ^3.16.3
         version: 3.16.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-router-dom:
         specifier: ^7.1.1
         version: 7.1.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
     devDependencies:
       '@types/react':
         specifier: ^19.0.4
@@ -297,6 +309,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@hookform/resolvers@4.1.0':
+    resolution: {integrity: sha512-fX/uHKb+OOCpACLc6enuTQsf0ZpRrKbeBBPETg5PCPLCIYV6osP2Bw6ezuclM61lH+wBF9eXcuC0+BFh9XOEnQ==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
@@ -429,6 +446,14 @@ packages:
     resolution: {integrity: sha512-4ZedScpxxIrVO7otcZ8kCX1mZArtH2Wfj3uFCxRJ9NO80gg1XV0U/b2f/MKaGwj2X3QopHfoWiDQ917FRpwY3w==}
     cpu: [x64]
     os: [win32]
+
+  '@tanstack/query-core@5.66.0':
+    resolution: {integrity: sha512-J+JeBtthiKxrpzUu7rfIPDzhscXF2p5zE/hVdrqkACBP8Yu0M96mwJ5m/8cPPYQE9aRNvXztXHlNwIh4FEeMZw==}
+
+  '@tanstack/react-query@5.66.0':
+    resolution: {integrity: sha512-z3sYixFQJe8hndFnXgWu7C79ctL+pI0KAelYyW+khaNJ1m22lWrhJU2QrsTcRKMuVPtoZvfBYrTStIdKo+x0Xw==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -1166,6 +1191,12 @@ packages:
     peerDependencies:
       react: ^19.0.0
 
+  react-hook-form@7.54.2:
+    resolution: {integrity: sha512-eHpAUgUjWbZocoQYUHposymRb4ZP6d0uwUnooL2uOybA9/3tPUvoAKqEWK1WaSiTxxOfTpffNZP7QwlnM3/gEg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
+
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -1467,6 +1498,9 @@ packages:
     resolution: {integrity: sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==}
     engines: {node: '>=12'}
 
+  zod@3.24.2:
+    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
+
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
@@ -1661,6 +1695,11 @@ snapshots:
   '@esbuild/win32-x64@0.24.2':
     optional: true
 
+  '@hookform/resolvers@4.1.0(react-hook-form@7.54.2(react@19.0.0))':
+    dependencies:
+      caniuse-lite: 1.0.30001699
+      react-hook-form: 7.54.2(react@19.0.0)
+
   '@isaacs/cliui@8.0.2':
     dependencies:
       string-width: 5.1.2
@@ -1758,6 +1797,13 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.34.7':
     optional: true
+
+  '@tanstack/query-core@5.66.0': {}
+
+  '@tanstack/react-query@5.66.0(react@19.0.0)':
+    dependencies:
+      '@tanstack/query-core': 5.66.0
+      react: 19.0.0
 
   '@types/babel__core@7.20.5':
     dependencies:
@@ -2511,6 +2557,10 @@ snapshots:
       react: 19.0.0
       scheduler: 0.25.0
 
+  react-hook-form@7.54.2(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+
   react-is@16.13.1: {}
 
   react-lifecycles-compat@3.0.4: {}
@@ -2829,3 +2879,5 @@ snapshots:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.1.1
+
+  zod@3.24.2: {}

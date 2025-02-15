@@ -10,8 +10,12 @@ module.exports = {
         "poke-light-blue": "#A8DADC",
         "poke-neutral-blue": "#457B9D",
         "poke-dark-blue": "#1D3557",
+        "poke-light-grey": "#cfd1d3",
+      },
+      height: {
+        26: "104px",
       },
     },
   },
   plugins: [],
-};
+}

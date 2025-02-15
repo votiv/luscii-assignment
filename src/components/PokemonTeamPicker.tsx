@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
-import Modal from "react-modal";
-import { getAFewPokemon } from "../api/pokemonTrainer.api";
-import { PokemonTeamMember } from "../api/types/pokemonTeamMember.type";
+import { useEffect, useState } from "react"
+import Modal from "react-modal"
+import classNames from "classnames"
 
-import { PokemonTeam } from "../api/types/trainer.type";
-import { Button } from "./Button";
+import { getAFewPokemon } from "../api/pokemonTrainer.api"
+import { type PokemonTeamMember } from "../api/types/pokemonTeamMember.type"
+import { type PokemonTeam } from "../api/types/trainer.type"
+import { Button } from "./Button"
 
 type PokemonTeamPickerProps = {
-  isOpen: boolean;
-  onSelected: (team: PokemonTeam) => void;
-  onClose: () => void;
-};
+  isOpen: boolean
+  onSelected: (team: PokemonTeam) => void
+  onClose: () => void
+}
 
 const customStyles = {
   content: {
@@ -22,12 +23,12 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     borderRadius: 0,
   },
-};
+}
 
-export const PokemonTeamPicker: React.FC<PokemonTeamPickerProps> = (props) => {
-  const { isOpen, onSelected, onClose } = props;
-  const [modalIsOpen, setModalIsOpen] = useState(isOpen);
-  const [fetchedPokemon, setFetchedPokemon] = useState<PokemonTeamMember[]>([]);
+export const PokemonTeamPicker = ({ isOpen, onSelected, onClose }: PokemonTeamPickerProps) => {
+  const [modalIsOpen, setModalIsOpen] = useState(isOpen)
+  const [fetchedPokemon, setFetchedPokemon] = useState<PokemonTeam>([])
+  const [pokeTeam, togglePokeTeam] = useState<PokemonTeam>([])
 
   useEffect(() => {
     getAFewPokemon().then((pokemon) => {
@@ -36,41 +37,51 @@ export const PokemonTeamPicker: React.FC<PokemonTeamPickerProps> = (props) => {
           name: entry.name.toUpperCase(),
           id: entry.id,
           imagePath: entry.sprites.front_default,
-        };
-      });
+        }
+      })
 
-      setFetchedPokemon(transformedResult);
-    });
-  }, []);
+      setFetchedPokemon(transformedResult)
+    })
+  }, [])
 
   useEffect(() => {
-    setModalIsOpen(isOpen);
-  }, [isOpen]);
-
-  function openModal() {
-    setModalIsOpen(true);
-  }
+    setModalIsOpen(isOpen)
+  }, [isOpen])
 
   function closeModal() {
-    setModalIsOpen(false);
-    onClose();
+    setModalIsOpen(false)
+    onClose()
+  }
+
+  const togglePokemonSelection = (selectedPokemon: PokemonTeamMember) => () => {
+    togglePokeTeam((prevPokemon) =>
+      prevPokemon.find((p) => p.id === selectedPokemon.id)
+        ? prevPokemon.filter((p) => p.id !== selectedPokemon.id)
+        : [...prevPokemon, selectedPokemon],
+    )
+  }
+
+  const saveTeamSelection = () => {
+    onSelected(pokeTeam)
+    closeModal()
   }
 
   return (
-    <Modal
-      isOpen={modalIsOpen}
-      onRequestClose={closeModal}
-      style={customStyles}
-      contentLabel="Example Modal"
-    >
+    <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
       <div className="flex flex-row items-center justify-between">
         <h2 className="text-lg">Pick your team</h2>
-        <Button title="x" onClick={closeModal} />
+        <Button onClick={closeModal}>x</Button>
       </div>
-      <div className="mt-2">
+      <div className="my-2">
         <div className="grid grid-cols-5 gap-2 items-center justify-center">
           {fetchedPokemon.map((pokemon) => (
-            <div className="bg-red-200" key={pokemon.id}>
+            <div
+              className={classNames("bg-red-200", {
+                "border-2 border-poke-red": pokeTeam.find((p) => p.id === pokemon.id),
+              })}
+              onClick={togglePokemonSelection(pokemon)}
+              key={pokemon.id}
+            >
               <img
                 title={pokemon.name}
                 className="hover:animate-bounce p-1"
@@ -81,6 +92,9 @@ export const PokemonTeamPicker: React.FC<PokemonTeamPickerProps> = (props) => {
           ))}
         </div>
       </div>
+      <div className="flex flex-row w-full justify-end">
+        <Button onClick={saveTeamSelection}>Save</Button>
+      </div>
     </Modal>
-  );
-};
+  )
+}

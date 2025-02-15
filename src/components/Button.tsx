@@ -1,16 +1,24 @@
-type ButtonProps = {
-  onClick: () => void;
-  title: string;
-};
+import classNames from "classnames"
+import { PropsWithChildren } from "react"
 
-export const Button: React.FC<ButtonProps> = (props) => {
-  const { onClick, title } = props;
+type ButtonProps = {
+  onClick: () => void
+  disabled?: boolean
+  type?: "button" | "submit"
+}
+
+export const Button = ({ onClick, disabled, type = "button", children }: PropsWithChildren<ButtonProps>) => {
   return (
     <button
-      className="bg-poke-red hover:bg-red-400 text-white font-bold py-2 px-4 transition-colors"
+      className={classNames(
+        "text-white font-bold py-2 px-4 transition-colors",
+        disabled ? "bg-poke-light-grey" : "bg-poke-red hover:bg-red-400",
+      )}
+      disabled={disabled}
       onClick={onClick}
+      type={type}
     >
-      {title}
+      {children}
     </button>
-  );
-};
+  )
+}
