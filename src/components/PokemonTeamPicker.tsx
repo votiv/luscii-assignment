@@ -93,7 +93,7 @@ export const PokemonTeamPicker = ({ isOpen, onSelected, onClose }: PokemonTeamPi
         </div>
       </div>
       <div className="flex flex-row w-full justify-end">
-        <Button onClick={saveTeamSelection}>Save</Button>
+        <Button onClick={saveTeamSelection}>Select</Button>
       </div>
     </Modal>
   )

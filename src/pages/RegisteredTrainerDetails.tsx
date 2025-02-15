@@ -29,7 +29,6 @@ export const RegisteredTrainerDetails = () => {
   const togglePicker = () => setIsPickerOpen((prevState) => !prevState)
 
   const saveTrainer = async (formData: TrainerFormData) => {
-    console.log("selected pokemon", selectedPokemon)
     await registerTrainer({
       ...formData,
       pokemonTeam: selectedPokemon,
@@ -40,7 +39,7 @@ export const RegisteredTrainerDetails = () => {
   const handlePokemonSelection = (team: PokemonTeam) => setSelectedPokemon(team)
 
   return (
-    <div className="py-8 w-96 mx-auto bg-poke-cream text-poke-dark-blue p-4 ">
+    <div className="py-8 w-96 mx-auto bg-poke-cream text-poke-dark-blue p-4">
       <PokemonTeamPicker isOpen={isPickerOpen} onClose={togglePicker} onSelected={handlePokemonSelection} />
 
       <form className="flex flex-col space-y-2" onSubmit={handleSubmit(saveTrainer)}>

@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
-import { getAllTrainers } from "../api/pokemonTrainer.api";
-import { RegisteredTrainersTable } from "../components/RegisteredTrainersTable";
+import { RegisteredTrainersTable } from "../components/RegisteredTrainersTable"
+import { useTrainer } from "../api/useTrainer"
+import { Spinner } from "../components/Spinner"
 
 export const RegisteredTrainers = () => {
-  const [trainers, setTrainers] = useState([]);
+  const { trainers, areTrainersLoading } = useTrainer()
 
-  useEffect(() => {
-    getAllTrainers().then((fetchedTrainers) => {
-      setTrainers(fetchedTrainers);
-    });
-  }, []);
-
-  return <RegisteredTrainersTable trainers={trainers} />;
-};
+  return areTrainersLoading ? <Spinner /> : <RegisteredTrainersTable trainers={trainers} />
+}

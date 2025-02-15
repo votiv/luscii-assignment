@@ -22,3 +22,11 @@ export const postTrainer = (trainer: Omit<Trainer, "id">) =>
     },
     body: JSON.stringify(trainer),
   })
+
+export const deleteTrainer = (trainerId: number) =>
+  fetch(`${rootApi}/${trainerId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
