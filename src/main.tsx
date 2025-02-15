@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Modal from "react-modal";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
-
-import "./main.css";
 import { RegisteredTrainers } from "./pages/RegisteredTrainers";
 import { RegisterdTrainerDetails } from "./pages/RegisterdTrainerDetails";
+
+import "./main.css";
 
 Modal.setAppElement("#root");
 
@@ -16,6 +16,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
     children: [
+      {
+        index: true,
+        element: <Navigate to="/trainers" replace />
+      },
       {
         path: "trainers",
         element: <RegisteredTrainers />,
