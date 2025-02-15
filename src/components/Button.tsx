@@ -20,3 +20,5 @@ export const Button = ({ onClick, disabled, type = "button", children }: PropsWi
     {children}
   </button>
 )
+
+Button.displayName = "Button"

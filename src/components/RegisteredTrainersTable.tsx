@@ -57,3 +57,5 @@ export const RegisteredTrainersTable = ({ trainers }: RegisteredTrainersTablePro
     </table>
   )
 }
+
+RegisteredTrainersTable.displayName = "RegisteredTrainersTable"

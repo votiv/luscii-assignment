@@ -75,6 +75,44 @@
         }
       ],
       "id": 2
+    },
+    {
+      "name": "Yello",
+      "email": "haha@email.com",
+      "phoneNumber": "4321123456",
+      "pokemonTeam": [
+        {
+          "id": 6,
+          "name": "charizard",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
+        },
+        {
+          "id": 3,
+          "name": "venusaur",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
+        },
+        {
+          "id": 9,
+          "name": "blastoise",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png"
+        },
+        {
+          "id": 26,
+          "name": "raichu",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png"
+        },
+        {
+          "id": 22,
+          "name": "fearow",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png"
+        },
+        {
+          "id": 17,
+          "name": "pidgeotto",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png"
+        }
+      ],
+      "id": 3
     }
   ]
 }
