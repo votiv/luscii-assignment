@@ -1,18 +1,37 @@
-const rootApi = "http://localhost:3000/trainers";
+import { Trainer } from "./types/trainer.type"
 
-export const getAllTrainers = () =>
-  fetch(rootApi).then((response) => response.json());
+const rootApi = "http://localhost:3000/trainers"
 
-export const getTrainer = (id: number) =>
-  fetch(`${rootApi}/${id}`).then((response) => response.json());
+export const getAllTrainers = () => fetch(rootApi).then((response) => response.json())
 
-const getPokemon = (id: number) =>
-  fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((response) =>
-    response.json()
-  );
+export const getTrainer = (id: number) => fetch(`${rootApi}/${id}`).then((response) => response.json())
 
-export const getAFewPokemon = () => {
-  const amount = Array.from({ length: 30 }, (_, i) => i + 1);
+const getPokemon = (id: number) => fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((response) => response.json())
 
-  return Promise.all(amount.map(getPokemon));
-};
+export const getAFewPokemon = (ids: number[]) => Promise.all(ids.map(getPokemon))
+
+export const postTrainer = (trainer: Omit<Trainer, "id">) =>
+  fetch(rootApi, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(trainer),
+  })
+
+export const putTrainer = (trainer: Trainer) =>
+  fetch(`${rootApi}/${trainer.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(trainer),
+  })
+
+export const deleteTrainer = (trainerId: number) =>
+  fetch(`${rootApi}/${trainerId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
