@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 import { Trainer } from "./types/trainer.type"
-import { deleteTrainer, getAllTrainers, getTrainer, postTrainer } from "./pokemonTrainer.api"
+import { deleteTrainer, getAllTrainers, getTrainer, postTrainer, putTrainer } from "./pokemonTrainer.api"
 
 export const useTrainer = (trainerId?: number) => {
   const queryClient = useQueryClient()
@@ -25,12 +25,13 @@ export const useTrainer = (trainerId?: number) => {
   })
 
   const {
-    data: registeredTrainer,
-    mutateAsync: registerTrainer,
-    error: registrationError,
+    data: upsertedTrainer,
+    mutateAsync: upsertTrainer,
+    error: upsertionError,
   } = useMutation({
     mutationKey: ["trainer"],
-    mutationFn: postTrainer,
+    mutationFn: (trainer: Trainer | Omit<Trainer, "id">) =>
+      "id" in trainer && trainer.id ? putTrainer(trainer) : postTrainer(trainer),
   })
 
   const { mutateAsync: removeTrainer, error: removeTrainerError } = useMutation({
@@ -44,12 +45,12 @@ export const useTrainer = (trainerId?: number) => {
   return {
     trainer,
     trainers,
-    registeredTrainer,
+    upsertedTrainer,
     isTrainerLoading,
     areTrainersLoading,
-    registerTrainer,
+    upsertTrainer,
     trainerError,
-    registrationError,
+    upsertionError,
     removeTrainer,
     removeTrainerError,
     trainersError,

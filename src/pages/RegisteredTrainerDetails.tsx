@@ -1,26 +1,28 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import classNames from "classnames"
 
 import { type PokemonTeam } from "../api/types/trainer.type"
 import { Button } from "../components/Button"
 import { PokemonTeamPicker } from "../components/PokemonTeamPicker"
 import { useTrainer } from "../api/useTrainer"
 import { type TrainerFormData, trainerSchema } from "../trainerSchema"
-import classNames from "classnames"
+import { PokemonCard } from "../components/PokemonCard"
+import { PokemonCardShimmer } from "../components/PokemonCardShimmer"
 
 export const RegisteredTrainerDetails = () => {
   const navigate = useNavigate()
   const { trainerId } = useParams()
   const [isPickerOpen, setIsPickerOpen] = useState(false)
-  const { trainer, registerTrainer } = useTrainer(Number(trainerId))
+  const { trainer, upsertTrainer } = useTrainer(Number(trainerId))
   const [selectedPokemon, setSelectedPokemon] = useState<PokemonTeam>([])
-  const isRegistrationPage = !Number.isInteger(Number(trainerId))
+  const isRegistrationPage = useMemo(() => !Number.isInteger(Number(trainerId)), [trainerId])
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isDirty, dirtyFields },
   } = useForm<TrainerFormData>({
     resolver: zodResolver(trainerSchema),
     mode: "all",
@@ -29,14 +31,17 @@ export const RegisteredTrainerDetails = () => {
   const togglePicker = () => setIsPickerOpen((prevState) => !prevState)
 
   const saveTrainer = async (formData: TrainerFormData) => {
-    await registerTrainer({
+    await upsertTrainer({
+      id: trainerId ? Number(trainerId) : undefined,
       ...formData,
       pokemonTeam: selectedPokemon,
     })
     navigate("/")
   }
 
-  const handlePokemonSelection = (team: PokemonTeam) => setSelectedPokemon(team)
+  const handlePokemonSelection = (team: PokemonTeam) => {
+    setSelectedPokemon(team)
+  }
 
   return (
     <div className="py-8 w-96 mx-auto bg-poke-cream text-poke-dark-blue p-4">
@@ -79,47 +84,31 @@ export const RegisteredTrainerDetails = () => {
           Edit team
         </Button>
         <div className="grid grid-cols-3 gap-2 items-center justify-center">
-          {isRegistrationPage && selectedPokemon.length === 0
-            ? Array.from({ length: 6 }).map((_, i) => (
-                <div
-                  className="relative w-28 h-26 overflow-hidden bg-gradient-to-r from-red-100 to-red-200 animate-shimmer"
-                  key={i}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent -translate-x-full animate-shimmer"></div>
-                </div>
-              ))
-            : selectedPokemon.map((pokeTeamMember) => (
-                <div className="bg-red-200" key={pokeTeamMember.id}>
-                  <img
-                    title={pokeTeamMember.name}
-                    className="hover:animate-bounce p-1"
-                    src={pokeTeamMember.imagePath}
-                    alt={pokeTeamMember.name}
-                  />
-                </div>
-              ))}
+          {isRegistrationPage &&
+            (selectedPokemon.length === 0
+              ? Array.from({ length: 6 }).map((_, i) => <PokemonCardShimmer key={i} />)
+              : selectedPokemon.map((pokeTeamMember) => (
+                  <PokemonCard key={pokeTeamMember.id} pokemon={pokeTeamMember} />
+                )))}
 
           {!isRegistrationPage &&
-            trainer?.pokemonTeam.map((pokeTeamMember) => (
-              <div className="bg-red-200" key={pokeTeamMember.id}>
-                <img
-                  title={pokeTeamMember.name}
-                  className="hover:animate-bounce p-1"
-                  src={pokeTeamMember.imagePath}
-                  alt={pokeTeamMember.name}
-                />
-              </div>
-            ))}
+            (selectedPokemon.length > 0
+              ? selectedPokemon.map((pokeTeamMember) => (
+                  <PokemonCard key={pokeTeamMember.id} pokemon={pokeTeamMember} />
+                ))
+              : trainer?.pokemonTeam.map((pokeTeamMember) => (
+                  <PokemonCard key={pokeTeamMember.id} pokemon={pokeTeamMember} />
+                )))}
         </div>
 
         <div className="flex justify-end">
           <button
             className={classNames(
               "text-white font-bold py-2 px-4 transition-colors",
-              !isValid || selectedPokemon.length !== 6 ? "bg-poke-light-grey" : "bg-poke-red hover:bg-red-400",
+              !isValid ? "bg-poke-light-grey" : "bg-poke-red hover:bg-red-400",
             )}
             type="submit"
-            disabled={!isValid || selectedPokemon.length !== 6}
+            disabled={!isValid}
           >
             Save
           </button>
@@ -128,3 +117,5 @@ export const RegisteredTrainerDetails = () => {
     </div>
   )
 }
+
+RegisteredTrainerDetails.displayName = "RegisteredTrainerDetails"

@@ -2,10 +2,11 @@ import { useEffect, useState } from "react"
 import Modal from "react-modal"
 import classNames from "classnames"
 
-import { getAFewPokemon } from "../api/pokemonTrainer.api"
 import { type PokemonTeamMember } from "../api/types/pokemonTeamMember.type"
 import { type PokemonTeam } from "../api/types/trainer.type"
+import { usePokemon } from "../api/usePokemon"
 import { Button } from "./Button"
+import { Spinner } from "./Spinner"
 
 type PokemonTeamPickerProps = {
   isOpen: boolean
@@ -27,43 +28,31 @@ const customStyles = {
 
 export const PokemonTeamPicker = ({ isOpen, onSelected, onClose }: PokemonTeamPickerProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(isOpen)
-  const [fetchedPokemon, setFetchedPokemon] = useState<PokemonTeam>([])
   const [pokeTeam, togglePokeTeam] = useState<PokemonTeam>([])
-
-  useEffect(() => {
-    getAFewPokemon().then((pokemon) => {
-      const transformedResult = pokemon.map((entry) => {
-        return {
-          name: entry.name.toUpperCase(),
-          id: entry.id,
-          imagePath: entry.sprites.front_default,
-        }
-      })
-
-      setFetchedPokemon(transformedResult)
-    })
-  }, [])
+  const { pokemonPool, isPokemonPoolLoading } = usePokemon()
 
   useEffect(() => {
     setModalIsOpen(isOpen)
   }, [isOpen])
 
-  function closeModal() {
+  const closeModal = () => {
     setModalIsOpen(false)
     onClose()
   }
 
-  const togglePokemonSelection = (selectedPokemon: PokemonTeamMember) => () => {
-    togglePokeTeam((prevPokemon) =>
-      prevPokemon.find((p) => p.id === selectedPokemon.id)
-        ? prevPokemon.filter((p) => p.id !== selectedPokemon.id)
-        : [...prevPokemon, selectedPokemon],
-    )
+  const togglePokemonSelection = (newSelection: PokemonTeamMember) => () => {
+    const selectedPokemon = pokeTeam.find((s) => s.id === newSelection.id)
+    if (selectedPokemon) {
+      togglePokeTeam((prevState) => prevState.filter((ps) => ps.id !== selectedPokemon.id))
+    } else if (pokeTeam.length < 6) {
+      togglePokeTeam((prevState) => [...prevState, newSelection])
+    }
   }
 
   const saveTeamSelection = () => {
     onSelected(pokeTeam)
     closeModal()
+    togglePokeTeam([])
   }
 
   return (
@@ -74,22 +63,30 @@ export const PokemonTeamPicker = ({ isOpen, onSelected, onClose }: PokemonTeamPi
       </div>
       <div className="my-2">
         <div className="grid grid-cols-5 gap-2 items-center justify-center">
-          {fetchedPokemon.map((pokemon) => (
-            <div
-              className={classNames("bg-red-200", {
-                "border-2 border-poke-red": pokeTeam.find((p) => p.id === pokemon.id),
-              })}
-              onClick={togglePokemonSelection(pokemon)}
-              key={pokemon.id}
-            >
-              <img
-                title={pokemon.name}
-                className="hover:animate-bounce p-1"
-                src={pokemon.imagePath}
-                alt={pokemon.name}
-              />
+          {isPokemonPoolLoading && (
+            <div>
+              <Spinner />
             </div>
-          ))}
+          )}
+
+          {pokemonPool &&
+            pokemonPool.map((pokemon) => (
+              <div
+                className={classNames("bg-red-200 relative", {
+                  "before:absolute before:top-0 before:left-0 before:right-0 before:bottom-0 before:border-2 before:border-poke-red":
+                    pokeTeam.find((p) => p.id === pokemon.id),
+                })}
+                onClick={togglePokemonSelection(pokemon)}
+                key={pokemon.id}
+              >
+                <img
+                  title={pokemon.name}
+                  className="hover:animate-bounce p-1"
+                  src={pokemon.imagePath}
+                  alt={pokemon.name}
+                />
+              </div>
+            ))}
         </div>
       </div>
       <div className="flex flex-row w-full justify-end">
@@ -98,3 +95,5 @@ export const PokemonTeamPicker = ({ isOpen, onSelected, onClose }: PokemonTeamPi
     </Modal>
   )
 }
+
+PokemonTeamPicker.displayName = "PokemonTeamPicker"

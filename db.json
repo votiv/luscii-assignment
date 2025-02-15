@@ -37,6 +37,44 @@
           "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png"
         }
       ]
+    },
+    {
+      "name": "Red",
+      "email": "red@pokeacademy.com",
+      "phoneNumber": "1231231231",
+      "pokemonTeam": [
+        {
+          "id": 13,
+          "name": "weedle",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png"
+        },
+        {
+          "id": 12,
+          "name": "butterfree",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png"
+        },
+        {
+          "id": 17,
+          "name": "pidgeotto",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png"
+        },
+        {
+          "id": 18,
+          "name": "pidgeot",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png"
+        },
+        {
+          "id": 24,
+          "name": "arbok",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/24.png"
+        },
+        {
+          "id": 30,
+          "name": "nidorina",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/30.png"
+        }
+      ],
+      "id": 2
     }
   ]
 }

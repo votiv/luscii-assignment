@@ -23,6 +23,15 @@ export const postTrainer = (trainer: Omit<Trainer, "id">) =>
     body: JSON.stringify(trainer),
   })
 
+export const putTrainer = (trainer: Trainer) =>
+  fetch(`${rootApi}/${trainer.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(trainer),
+  })
+
 export const deleteTrainer = (trainerId: number) =>
   fetch(`${rootApi}/${trainerId}`, {
     method: "DELETE",
