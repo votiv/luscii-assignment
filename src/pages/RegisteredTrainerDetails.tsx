@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -40,10 +40,6 @@ export const RegisteredTrainerDetails = () => {
         : (isValid && isDirty) || !!selectedPokemon.length,
     [isValid, isDirty, selectedPokemon],
   )
-
-  useEffect(() => {
-    console.log("shouldSubmit: ", shouldSubmit)
-  }, [shouldSubmit])
 
   const togglePicker = () => setIsPickerOpen((prevState) => !prevState)
 

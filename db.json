@@ -44,62 +44,19 @@
       "phoneNumber": "1231231231",
       "pokemonTeam": [
         {
-          "id": 13,
-          "name": "weedle",
-          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png"
+          "id": 3,
+          "name": "venusaur",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
         },
-        {
-          "id": 12,
-          "name": "butterfree",
-          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png"
-        },
-        {
-          "id": 17,
-          "name": "pidgeotto",
-          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png"
-        },
-        {
-          "id": 18,
-          "name": "pidgeot",
-          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png"
-        },
-        {
-          "id": 24,
-          "name": "arbok",
-          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/24.png"
-        },
-        {
-          "id": 30,
-          "name": "nidorina",
-          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/30.png"
-        }
-      ],
-      "id": 2
-    },
-    {
-      "name": "Yello",
-      "email": "haha@email.com",
-      "phoneNumber": "4321123456",
-      "pokemonTeam": [
         {
           "id": 6,
           "name": "charizard",
           "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
         },
         {
-          "id": 3,
-          "name": "venusaur",
-          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
-        },
-        {
-          "id": 9,
-          "name": "blastoise",
-          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png"
-        },
-        {
-          "id": 26,
-          "name": "raichu",
-          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png"
+          "id": 12,
+          "name": "butterfree",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png"
         },
         {
           "id": 22,
@@ -110,6 +67,49 @@
           "id": 17,
           "name": "pidgeotto",
           "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png"
+        },
+        {
+          "id": 26,
+          "name": "raichu",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "name": "Yello",
+      "email": "haha@email.com",
+      "phoneNumber": "4321123456",
+      "pokemonTeam": [
+        {
+          "id": 38,
+          "name": "ninetales",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/38.png"
+        },
+        {
+          "id": 31,
+          "name": "nidoqueen",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/31.png"
+        },
+        {
+          "id": 24,
+          "name": "arbok",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/24.png"
+        },
+        {
+          "id": 15,
+          "name": "beedrill",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/15.png"
+        },
+        {
+          "id": 8,
+          "name": "wartortle",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png"
+        },
+        {
+          "id": 2,
+          "name": "ivysaur",
+          "imagePath": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
         }
       ],
       "id": 3

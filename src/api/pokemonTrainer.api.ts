@@ -8,11 +8,7 @@ export const getTrainer = (id: number) => fetch(`${rootApi}/${id}`).then((respon
 
 const getPokemon = (id: number) => fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((response) => response.json())
 
-export const getAFewPokemon = () => {
-  const amount = Array.from({ length: 30 }, (_, i) => i + 1)
-
-  return Promise.all(amount.map(getPokemon))
-}
+export const getAFewPokemon = (ids: number[]) => Promise.all(ids.map(getPokemon))
 
 export const postTrainer = (trainer: Omit<Trainer, "id">) =>
   fetch(rootApi, {

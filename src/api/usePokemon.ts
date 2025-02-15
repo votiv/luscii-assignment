@@ -1,12 +1,29 @@
+import { useMemo } from "react"
 import { useQuery } from "@tanstack/react-query"
 
 import { getAFewPokemon } from "./pokemonTrainer.api"
-import { PartialRawPokemon, type PokemonTeamMember } from "./types/pokemonTeamMember.type"
+import { type PartialRawPokemon, type PokemonTeamMember } from "./types/pokemonTeamMember.type"
+import { type Trainer } from "./types/trainer.type"
+import { getPokemonIds } from "./utils"
 
-export const usePokemon = () => {
+export const usePokemon = (trainers: Trainer[]) => {
+  const usedPokemonIds = useMemo(
+    () =>
+      trainers.reduce((ids, trainer) => {
+        trainer.pokemonTeam.forEach((pokemon) => {
+          if (ids.indexOf(pokemon.id) === -1) {
+            ids.push(pokemon.id)
+          }
+        })
+
+        return ids
+      }, [] as number[]),
+    [trainers],
+  )
+
   const { data, isLoading, error } = useQuery<PartialRawPokemon[], Error, PokemonTeamMember[]>({
     queryKey: ["pokemon"],
-    queryFn: getAFewPokemon,
+    queryFn: () => getAFewPokemon(getPokemonIds(usedPokemonIds)),
     select: (data) =>
       data.map((pokemon) => ({
         id: pokemon.id,

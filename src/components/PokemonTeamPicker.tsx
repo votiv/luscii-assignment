@@ -7,6 +7,7 @@ import { type PokemonTeam } from "../api/types/trainer.type"
 import { usePokemon } from "../api/usePokemon"
 import { Button } from "./Button"
 import { Spinner } from "./Spinner"
+import { useTrainer } from "../api/useTrainer"
 
 type PokemonTeamPickerProps = {
   isOpen: boolean
@@ -29,7 +30,8 @@ const customStyles = {
 export const PokemonTeamPicker = ({ isOpen, onSelected, onClose }: PokemonTeamPickerProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(isOpen)
   const [pokeTeam, togglePokeTeam] = useState<PokemonTeam>([])
-  const { pokemonPool, isPokemonPoolLoading } = usePokemon()
+  const { trainers } = useTrainer()
+  const { pokemonPool, isPokemonPoolLoading } = usePokemon(trainers)
 
   useEffect(() => {
     setModalIsOpen(isOpen)
